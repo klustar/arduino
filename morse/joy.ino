@@ -1,16 +1,105 @@
-#define z 8
+/*
+   조이스틱 x축 : 다음/이전 문자
+   조이스틱 y축 : 다음/이전 문자군
+   조이스틱 z축 : 문자 선택
+   버튼 : 문자열 리셋
+*/
 
-void setup() {
-  Serial.begin(9600);
+#define zPin 8
+#define gap 200
 
-  pinMode(z, INPUT_PULLUP);
+int invert(int);
+void clear(char);
+
+int x, y, z;
+int count = 0;
+char wordn = '0';
+char wordl = 'A';
+char words = 'a';
+char arr[16];
+int n = 0;
+
+void setup()
+{
+    Serial.begin(9600);
+
+    pinMode(zPin, INPUT_PULLUP);
 }
 
-void loop() {
-  Serial.print(analogRead(A0));
-  Serial.print(", ");
-  Serial.print(analogRead(A1));
-  Serial.print(", ");
-  Serial.println(digitalRead(z));
-  delay(100);
+void loop()
+{
+    x = invert(analogRead(A0));
+    y = invert(analogRead(A1));
+    z = digitalRead(zPin);
+
+    if (y == 0)
+    {
+        count--;
+        count += 3;
+        count %= 3;
+    }
+    else if (y == 1)
+    {
+        count++;
+        count %= 3;
+    }
+
+    switch (count)
+    {
+    case 0:
+
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    default:
+        break;
+    }
+    if (x == 0)
+    {
+    }
+    else if (x == 1)
+    {
+    }
+    else
+    {
+        if (z == 0)
+        {
+            arr[n] = word;
+            n++;
+        }
+    }
+
+    Serial.print(x);
+    Serial.print(", ");
+    Serial.print(y);
+    Serial.print(", ");
+    Serial.println(z);
+    delay(500);
+}
+
+int invert(int inNum)
+{
+    if (inNum >= 0 && inNum < 0 + gap)
+    {
+        return 0;
+    }
+    else if (inNum > 1023 - gap && inNum <= 1023)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+void clear(char arr[])
+{
+    int i;
+    for (i = 0; i < 16; i++)
+    {
+        arr[i] = '\0';
+    }
 }
