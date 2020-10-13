@@ -4,11 +4,13 @@
 #include "Arduino.h"
 
 class morse {
-public:
-	morse(int pin);
+  public:
+    morse(int pin);
+    //void yin();
+    //void yang();
 
     //영문자 메소드
-	void signal_A();
+    void signal_A();
     void signal_B();
     void signal_C();
     void signal_D();
@@ -46,9 +48,9 @@ public:
     void signal_8();
     void signal_9();
     void signal_0();
-    
-private:
-	int _pin;
+
+  private:
+    int _pin;
 };
 
 #endif

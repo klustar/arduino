@@ -1,9 +1,4 @@
-#include "morse.h"
-#include <string.h>
-
-morse morse(LED_BUILTIN);
 #define sign 12
-#define button 7
 
 void yin();
 void yang();
@@ -24,20 +19,18 @@ void loop() {
 }
 
 void yin() {
-  int _pin = sign;
   //짧은 신호
-  digitalWrite(_pin, HIGH);
+  digitalWrite(sign, HIGH);
   delay(500);
-  digitalWrite(_pin, LOW);
+  digitalWrite(sign, LOW);
   delay(500);
 }
 
 void yang() {
-  int _pin = sign;
   //긴 신호
-  digitalWrite(_pin, HIGH);
+  digitalWrite(sign, HIGH);
   delay(1000);
-  digitalWrite(_pin, LOW);
+  digitalWrite(sign, LOW);
   delay(500);
 }
 
