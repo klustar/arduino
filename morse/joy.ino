@@ -19,35 +19,29 @@ char words = 'a';
 char arr[16];
 int n = 0;
 
-void setup()
-{
+void setup(){
     Serial.begin(9600);
 
     pinMode(zPin, INPUT_PULLUP);
 }
 
-void loop()
-{
+void loop(){
     x = invert(analogRead(A0));
     y = invert(analogRead(A1));
     z = digitalRead(zPin);
 
-    if (y == 0)
-    {
+    if (y == 0){
         count--;
         count += 3;
         count %= 3;
     }
-    else if (y == 1)
-    {
+    else if (y == 1){
         count++;
         count %= 3;
     }
 
-    switch (count)
-    {
+    switch (count){
     case 0:
-
         break;
     case 1:
         break;
@@ -56,16 +50,12 @@ void loop()
     default:
         break;
     }
-    if (x == 0)
-    {
+    if (x == 0){
     }
-    else if (x == 1)
-    {
+    else if (x == 1){
     }
-    else
-    {
-        if (z == 0)
-        {
+    else{
+        if (z == 0){
             arr[n] = word;
             n++;
         }
@@ -79,27 +69,21 @@ void loop()
     delay(500);
 }
 
-int invert(int inNum)
-{
-    if (inNum >= 0 && inNum < 0 + gap)
-    {
+int invert(int inNum){
+    if (inNum >= 0 && inNum < 0 + gap){
         return 0;
     }
-    else if (inNum > 1023 - gap && inNum <= 1023)
-    {
+    else if (inNum > 1023 - gap && inNum <= 1023){
         return 1;
     }
-    else
-    {
+    else{
         return -1;
     }
 }
 
-void clear(char arr[])
-{
+void clear(char arr[]){
     int i;
-    for (i = 0; i < 16; i++)
-    {
+    for (i = 0; i < 16; i++){
         arr[i] = '\0';
     }
 }

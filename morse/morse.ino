@@ -1,3 +1,6 @@
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+
 #define sign 12
 
 void yin();
@@ -5,20 +8,20 @@ void yang();
 void signO();
 void signS();
 
-void setup() {
+void setup(){
   Serial.begin(9600);
 
   pinMode(sign, OUTPUT);
 }
 
-void loop() {
+void loop(){
   signS();
   signO();
   signS();
   delay(2000);
 }
 
-void yin() {
+void yin(){
   //짧은 신호
   digitalWrite(sign, HIGH);
   delay(500);
@@ -26,7 +29,7 @@ void yin() {
   delay(500);
 }
 
-void yang() {
+void yang(){
   //긴 신호
   digitalWrite(sign, HIGH);
   delay(1000);
@@ -34,13 +37,13 @@ void yang() {
   delay(500);
 }
 
-void signO() {
+void signO(){
   yang();
   yang();
   yang();
 }
 
-void signS() {
+void signS(){
   yin();
   yin();
   yin();
