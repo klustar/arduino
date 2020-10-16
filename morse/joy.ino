@@ -13,9 +13,7 @@ void clear(char);
 
 int x, y, z;
 int count = 0;
-char wordn = '0';
-char wordl = 'A';
-char words = 'a';
+char word = 'A';
 char arr[16];
 int n = 0;
 
@@ -42,10 +40,13 @@ void loop(){
 
     switch (count){
     case 0:
+        word='A';
         break;
     case 1:
+        word='a';
         break;
     case 2:
+        word='0';
         break;
     default:
         break;
