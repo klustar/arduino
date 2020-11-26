@@ -1,5 +1,3 @@
-#include <Wire.h>
-
 #define sign 12
 
 void yin();
@@ -8,8 +6,6 @@ void signO();
 void signS();
 
 void setup(){
-  Serial.begin(9600);
-
   pinMode(sign, OUTPUT);
 }
 

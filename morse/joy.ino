@@ -5,8 +5,10 @@
    버튼 : 문자열 리셋
 */
 
+#define xPin A0
+#define yPin A1
 #define zPin 8
-#define gap 200
+#define gap 200     // x,y축의 레버가 일정 범위에 들어와야 인식을 하는 기능
 
 int invert(int);
 void clear(char);
@@ -24,8 +26,8 @@ void setup(){
 }
 
 void loop(){
-    x = invert(analogRead(A0));
-    y = invert(analogRead(A1));
+    x = invert(analogRead(xPin));
+    y = invert(analogRead(yPin));
     z = digitalRead(zPin);
 
     if (y == 0){
