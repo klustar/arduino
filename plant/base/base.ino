@@ -14,10 +14,16 @@
 #define _light1 9   //밝기1
 #define _light2 10  //밝기2
 #define _light3 11  //밝기3
-#define _lux A0     //조도감지
+#define _lux A2     //조도감지
+#define tempPin1 A0
+#define humiPin1 A1
+#define hitPin1 4
+#define waterPump 5
 
 void dhtSet();
 void dhtGet();
+float tempSensing(int);
+int humiSensing(int);
 
 SoftwareSerial bluetooth(TX, RX); //블루투스 객체
 DHT dht(DHTPIN, DHTTYPE);           //온습도 객체
@@ -35,6 +41,9 @@ void setup() {
   pinMode(_light1, OUTPUT);
   pinMode(_light2, OUTPUT);
   pinMode(_light3, OUTPUT);
+  pinMode(hitPin1, OUTPUT);
+  pinMode(waterPump, OUTPUT);
+  pinMode(led,OUTPUT);
 }
 
 void loop() {
@@ -48,6 +57,26 @@ void loop() {
 
   dhtSet();
   dhtGet();
+
+  if (tempSensing(tempPin1) < 21) {
+    digitalWrite(hitPin1, HIGH);
+  }
+  else if (tempSensing(tempPin1) > 23) {
+    digitalWrite(hitPin1, LOW);
+  }
+  else {
+    delay(10);
+  }
+
+  if (humiSensing(humiPin1) < 350) {
+    digitalWrite(waterPump, HIGH);
+  }
+  else if (humiSending(humiPin1) > 650) {
+    digitalWrite(waterPump, LOW);
+  }
+  else {
+    delay(10);
+  }
 }
 
 void dhtSet() {
@@ -75,4 +104,24 @@ void dhtGet() {
   temp += (String)temperature;
   temp += "C";
   Serial.println(temp);
+}
+
+float tempSensing(int _pin) {
+  int reading = analogRead(_pin);
+  float voltage = reading * 5.0 / 1024.0;
+  float celTemp = (voltage - 0.5) * 100;
+
+  return celTemp;
+}
+
+int humiSensing(int _pin) {
+  /*
+     토양수분센서 변수범위
+     건조한토양 : 0~300
+     습한토양 : 301~700
+     물속 : 701~950
+  */
+  int reading = analogRead(_pin);
+
+  return reading;
 }
