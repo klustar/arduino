@@ -6,7 +6,7 @@
 #define move1Pin A0
 
 Servo motor1;
-int pos = 0;
+unsigned short pos = 0;
 char data;
 
 char num0 = 0b00000001;

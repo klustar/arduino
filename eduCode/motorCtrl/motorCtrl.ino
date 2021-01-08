@@ -3,7 +3,7 @@
 #define move1Pin A0
 
 Servo motor1;
-int pos=0;
+unsigned short pos=0;
 
 void setup() {
   motor1.attach(motor1Pin);
