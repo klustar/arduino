@@ -1,9 +1,7 @@
 #include <Servo.h>
-#define latchPin 12
-#define clockPin 11
-#define dataPin 10
-#define motor1Pin 9
-#define move1Pin A0
+#include "info.h"
+
+void load(char);
 
 Servo motor1;
 unsigned short pos = 0;
@@ -33,33 +31,29 @@ void loop() {
   motor1.write(pos);
   if (pos == 0) {
     data = num0;
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, data);
-    digitalWrite(latchPin, HIGH);
+    load(data);
   }
   else if (pos > 0 && pos < 50) {
     data = num1;
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, data);
-    digitalWrite(latchPin, HIGH);
+    load(data);
   }
   else if (pos >= 50 && pos < 100) {
     data = num2;
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, data);
-    digitalWrite(latchPin, HIGH);
+    load(data);
   }
   else if (pos >= 100 && pos < 150) {
     data = num3;
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, data);
-    digitalWrite(latchPin, HIGH);
+    load(data);
   }
   else {
     data = num4;
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, data);
-    digitalWrite(latchPin, HIGH);
+    load(data);
   }
   delay(100);
+}
+
+void load(char data) {
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, data);
+  digitalWrite(latchPin, HIGH);
 }
