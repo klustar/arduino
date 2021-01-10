@@ -1,30 +1,35 @@
-#define green 6
-#define red 7
-#define water A0
+#define green 6     // 녹색LED
+#define red 7       // 적색LED
+#define waterOUT 8  // 수분공급펌프
+#define waterIN A0  // 수분감지센서
 
-unsigned short level;
-unsigned short wet;
+unsigned short level; // 수분감지센서 측정값
+unsigned short wet;   // 식물마다 적절한 토양수분도
 
 void setup() {
   Serial.begin(9600);
+
   pinMode(green, OUTPUT);
   pinMode(red, OUTPUT);
+  pinMode(waterOUT,OUTPUT);
 }
 
 void loop() {
-  level = analogRead(water);
-  level = (level / 1023) * 100;
+  level = analogRead(waterIN);
+  level = (level / 1023) * 100;   // 수분도 퍼센트 변환
   wet = 40;
   
   if (level < wet) {
+    // 물을 줘야하는 상황
     digitalWrite(green, LOW);
     digitalWrite(red, HIGH);
-    // 물을 줘야하는 상황
+    digitalWrite(waterOUT,HIGH);
   }
   else {
+    // 물을 주지않아야하는 상황
     digitalWrite(green, HIGH);
     digitalWrite(red, LOW);
-    // 물을 주지않아야하는 상황
+    digitalWrite(waterOUT,LOW);    
   }
-  delay(100);
+  delay(10);
 }
