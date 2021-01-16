@@ -16,9 +16,12 @@ void setup() {
 
 void loop() {
   level = analogRead(waterIN);
-  level = (level / 1023) * 100;   // 수분도 퍼센트 변환
+  //Serial.print(level);
+  //Serial.print("   ");
+  level = map(level,0,1023,0,100);   // 수분도 퍼센트 변환
+  //Serial.println(level);
   wet = 40;
-  
+
   if (level < wet) {
     // 물을 줘야하는 상황
     digitalWrite(green, LOW);
