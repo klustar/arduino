@@ -9,6 +9,7 @@ void setup() {
 }
 
 void loop() {
+  // 2-state 스위치 상태제어
   if (digitalRead(toggle) == 1) {
     if (state == true) {
       state == false;
