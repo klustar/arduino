@@ -4,7 +4,7 @@
 #define waterIN A0  // 수분감지센서
 
 unsigned short level; // 수분감지센서 측정값
-unsigned short wet = 40; // 식물마다 적절한 토양수분도
+unsigned short wet = 15; // 식물마다 적절한 토양수분도
 
 void setup() {
   Serial.begin(9600);
@@ -17,9 +17,9 @@ void setup() {
 void loop() {
   level = analogRead(waterIN);
   level = map(level, 0, 1023, 0, 100); // 수분도 퍼센트 변환
-  //Serial.print(level);
-  //Serial.print("   ");
-  //Serial.println(level);
+  Serial.print(level);
+  Serial.print("   ");
+  Serial.println(level);
 
   if (level < wet) {
     // 물을 줘야하는 상황
