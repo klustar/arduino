@@ -1,34 +1,31 @@
-#define toggle 4    // 전원스위치
-#define cluster 5   // 식물조명제어
+#define toggle 4    // 라즈베리파이 신호
+#define light 5   // 식물조명제어
+#define lux A0      // 조도센서
 
-boolean state = false;
-z
+int lumi;
+int sign;
+
 void setup() {
-  //pinMode(cluster, OUTPUT);
-  pinMode(toggle, INPUT);
+  Serial.begin(9600);
+  pinMode(toggle,INPUT);
+  pinMode(light, OUTPUT);
 }
 
 void loop() {
-  /*
-    // 2-state 스위치 상태제어
-    if (digitalRead(toggle) == 1) {
-    if (state == true) {
-      state == false;
-    }
-    else {
-      state == true;
-    }
-    }
-  */
+  lumi=analogRead(A0);
+  lumi=map(lumi,0,1023,100,0);
+  Serial.println(lumi);
 
-  state = true;
-  if (state == true) {
-    digitalWrite(cluster, LOW);
-    delay(50);
-    digitalWrite(cluster, HIGH);
-    delay(50);
+  sign=digitalRead(toggle);
+
+  if(sign==true){
+    analogWrite(light,lumi);
+    delay(100);
   }
-  else {
-    digitalWrite(cluster, LOW);
+  else{
+    analogWrite(light,lumi);
+    delay(100);
   }
+  
+  delay(300);
 }

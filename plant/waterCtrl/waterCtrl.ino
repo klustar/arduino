@@ -16,7 +16,7 @@ void setup() {
 
 void loop() {
   level = analogRead(waterIN);
-  level = map(level, 0, 1023, 100, 0); // 수분도 퍼센트 변환
+  level = map(level, 0, 1023, 0, 100); // 수분도 퍼센트 변환
   
   //현재는 시리얼모니터에 출력하지만,
   //추후 현재시간과 함께 데이터베이스에 저장
@@ -27,14 +27,14 @@ void loop() {
     digitalWrite(green, LOW);
     digitalWrite(red, HIGH);
     digitalWrite(waterOUT, HIGH);
-    delay(100);
+    delay(10);
   }
   else {
     // 물을 주지않아야하는 상황
     digitalWrite(green, HIGH);
     digitalWrite(red, LOW);
     digitalWrite(waterOUT, LOW);
-    delay(100);
+    delay(10);
   }
-  delay(800);
+  delay(10);
 }

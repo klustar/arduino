@@ -36,9 +36,9 @@ void loop() {
     digitalWrite(green, LOW);
     digitalWrite(red, HIGH);
     digitalWrite(waterOUT, HIGH);
-    delay(90);
+    delay(1000);
     digitalWrite(waterOUT, LOW);
-    delay(10);
+    delay(100);
   }
   else {
     // 물을 주지않아야하는 상황
